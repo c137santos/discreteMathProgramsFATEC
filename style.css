@@ -1,0 +1,96 @@
+.cercadinho {
+    display: flex;
+    height: 300px;
+    flex-wrap: wrap;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.diagramaven {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+}
+
+.circle {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  -moz-opacity: 0.3;
+  -khtml-opacity: 0.3;
+  opacity: 0.3;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid black;
+  flex:1
+}
+
+#second {
+  background: yellow;
+}
+
+#first {
+  background: blue;
+  right: 25%;
+}
+
+#medium {
+  background-color:transparent;
+  position: absolute;
+  border-radius: 30%;
+  width: 300px;
+  height: 300px;
+  bottom: 25%;
+}
+
+#problem {
+  font-size: 8pt;
+  color: white;
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-left: 2px solid red;
+  border-top: 2px solid red;
+  top: 41px;
+  left: 71px;
+  z-index: -4;
+  background: red;
+}
+
+#problem:after {
+  position: absolute;
+  content: " ";
+  background: white;
+  width: 150px;
+  height: 150px;
+  top: -2px;
+  left: -2px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  z-index: -3;
+}
+
+
+img{
+  width: 100px;
+  height: 100px;
+  margin: 10px
+}
