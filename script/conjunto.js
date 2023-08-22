@@ -67,12 +67,12 @@ function verificaRespostas(elementosLilais, elementosAmarelos, elementosIntersec
 }
 
 
-// Essa função reuneElementos extrai e organiza os IDs dos elementos filhos de três círculos HTML diferentes: circuloAmarelo, circuloLilais e intercessao.
+// Essa função reuneElementos extrai e organiza os IDs dos elementos filhos de três círculos HTML diferentes: circuloAmarelo, circuloLilais e intersecao.
 
-function reuneElementos(circuloAmarelo, circuloLilais, intercessao) {
+function reuneElementos(circuloAmarelo, circuloLilais, intersecao) {
   let elementosLilais = []
   let elementosAmarelos = []
-  let elementosIntercessao = []
+  let elementosIntersecao = []
 
 // Loop para extrair os IDs dos elementos filhos do círculo amarelo.
   for (const child of circuloAmarelo.children) {
@@ -84,16 +84,16 @@ function reuneElementos(circuloAmarelo, circuloLilais, intercessao) {
   elementosLilais.push(child.id);
   }
 
-// Loop para extrair os IDs dos elementos filhos do intercessão.
-  for (const child of intercessao.children) {
-  elementosIntercessao.push(child.id)
+// Loop para extrair os IDs dos elementos filhos do intersecao.
+  for (const child of intersecao.children) {
+  elementosIntersecao.push(child.id)
   }
 
 // Organiza os IDs extraídos em um objeto.
   const elementosReunidos = {
     'lilais': elementosLilais,
     'amarelo': elementosAmarelos,
-    'intercessao': elementosIntercessao
+    'intersecao': elementosIntersecao
 
   }
 
@@ -108,16 +108,16 @@ function jaAcabou() {
 // Verifica se o cercado não possui mais elementos filhos. Ou seja, se tudo já foi distribuído.
   if (CERCADINHO.childElementCount == 0) {
     let elementos = []
-// Obtém os elementos dos círculos lilás, amarelo e da intercessão.
+// Obtém os elementos dos círculos lilás, amarelo e da intersecao.
       CIRCULOLILAIS = document.getElementById("first")
       CIRCULOAMARELO = document.getElementById("second")
-      INTERCESSAO = document.getElementById("medium")
+      INTERSECAO = document.getElementById("medium")
 // Reúne os elementos dos círculos em um objeto.
-      elementosReunidos = reuneElementos(CIRCULOAMARELO, CIRCULOLILAIS, INTERCESSAO)
-// Verifica se os arrays de elementos possuem tamanho maior que zero. Pois, nem caso de circulo de intercesao não pode haver circulos vazios.
-    if (elementosReunidos['lilais'].length && elementosReunidos['amarelo'].length && elementosReunidos['intercessao'].length > 0) {
+      elementosReunidos = reuneElementos(CIRCULOAMARELO, CIRCULOLILAIS, INTERSECAO)
+// Verifica se os arrays de elementos possuem tamanho maior que zero. Pois, nem caso de circulo de intersecao não pode haver circulos vazios.
+    if (elementosReunidos['lilais'].length && elementosReunidos['amarelo'].length && elementosReunidos['intersecao'].length > 0) {
 // Chama a função verificaResposta() passando os elementos de cada círculo
-      if(verificaRespostas(elementosReunidos['lilais'], elementosReunidos['amarelo'], elementosReunidos['intercessao'])) {
+      if(verificaRespostas(elementosReunidos['lilais'], elementosReunidos['amarelo'], elementosReunidos['intersecao'])) {
 // Caso positivo, é disparado a função de venceuJogo()
           venceuJogo()
         }
