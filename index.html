@@ -3,83 +3,93 @@
     <head>
     <title>O que tem em comum?</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script/conjunto.js"></script>
+    <script src="script/confetis.js"></script>
     </head>
     <body>
         <link rel="stylesheet" href="style.css">
-        <h1>Vamos descobrir o que eles tem em comum e diferentes?</h1>
-    <div id="container">
-        <div class="cercadinho">
-            <img
-            id="figurinha-01"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/pombo.png">
-            <img
-            id="figurinha-02"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/aguia.png">
-            <img
-            id="figurinha-03"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/aeronave.png">
-            <img
-            id="figurinha-04"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/balao-de-ar-quente.png">
-            <img
-            id="figurinha-05"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/coruja.png">
-            <img
-            id="figurinha-06"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/gato.png">
-            <img
-            id="figurinha-07"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/urso.png">
-            <img
-            id="figurinha-08"
-            ondragstart="onDragStart(event)"
-            draggable="true"
-            class="figurinhas"
-            src="imgs/helicoptero.png">
+        <div class="instrucoes">
+            <h1>Vamos descobrir o que eles têm em comum e diferentes?</h1>
+            <h3>Reúna no espaço roxo o que é parecido entre si</h3>
+            <span> Coloque aqui animais que têm algo em comum, como cachorros e gatos. </span>
+            <h3>Reúna no espaço amarelo o que é parecido entre si, mas diferente do grupo roxo</h3>
+            <h3>Reúna no meio aqueles que são parecidos com os grupos roxo e amarelo</h3>
+            <span>Coloque aqui coisas parecidas com os dois grupos, como pássaros que voam no céu.</span>
+            <h2> 🕵️‍♀️ Divirtam-se explorando e descobrindo o que todas essas coisas têm em comum e como elas são diferentes. <br> Vocês são verdadeiros detetives da semelhança e diferença!🕵️‍♂️</h2>
         </div>
-        <div class="diagramaven">
-            <div
-            id="first"
-            class="circle"
-            ondragover="onDragOver(event)"
-            ondrop="onDrop(event)">
+        <div id="container">
+            <div class="cercadinho" id="cercado">
+                <img
+                id="figurinha-pombo"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/pombo.png">
+                <img
+                id="figurinha-aguia"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/aguia.png">
+                <img
+                id="figurinha-aeronave"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/aeronave.png">
+                <img
+                id="figurinha-balao"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/balao-de-ar-quente.png">
+                <img
+                id="figurinha-coruja"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/coruja.png">
+                <img
+                id="figurinha-gato"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/gato.png">
+                <img
+                id="figurinha-urso"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/urso.png">
+                <img
+                id="figurinha-helicoptero"
+                ondragstart="onDragStart(event)"
+                draggable="true"
+                class="figurinhas"
+                src="imgs/helicoptero.png">
             </div>
+            <div class="diagramaven">
+                <div
+                id="first"
+                class="circle"
+                ondragover="onDragOver(event)"
+                ondrop="onDrop(event)">
+                </div>
 
-            <div id="second"
-            ondragover="onDragOver(event)"
-            ondrop="onDrop(event)"
-            class="circle">
+                <div
+                id="second"
+                ondragover="onDragOver(event)"
+                ondrop="onDrop(event)"
+                class="circle">
+                </div>
 
-            <div id="medium"
-            ondragover="onDragOver(event)"
-            ondrop="onDrop(event)"
-            ></div>
+                <div
+                id="medium"
+                ondragover="onDragOver(event)"
+                ondrop="onDrop(event)"
+                >
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
-    <div>
-    </div>
     </body>
 </html>
