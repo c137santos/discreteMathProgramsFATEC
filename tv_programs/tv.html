@@ -1,580 +1,135 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Resolve a Tabela Verdade</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .container {
-            margin: 20px auto;
-            width: 80%;
-        }
-
-        h3 {
-            text-align: center;
-        }
-
-        .tabela-padronizada {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .tabela-padronizada th,
-        .tabela-padronizada td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
+    <!DOCTYPE html>
+    <html>
+        <script type="module">
+            import { createApp } from 'https://unpkg.com/petite-vue?module'
+            
+            createApp({
+                questaoUmLinhas: 8,
+                questaoUmColunas: 9,
+                questaoUmCelulas: Array(8).fill().map(() => Array(8).fill("")),
+                gabarito: {
+                    questaoUmMatriz : [
+                    ['V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
+                    ['V', 'V', 'F', 'F', 'V', 'V', 'V', 'V', 'V'],
+                    ['V', 'F', 'V', 'F', 'V', 'V', 'V', 'V', 'V'],
+                    ['V', 'F', 'F', 'F', 'V', 'V', 'V', 'V', 'V'],
+                    ['F', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
+                    ['F', 'V', 'F', 'F', 'F', 'V', 'F', 'F', 'V'],
+                    ['F', 'F', 'V', 'F', 'F', 'F', 'V', 'F', 'V'],
+                    ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'V']
+                    ],
+                },
+                questaoUmCorPadrao: Array(8).fill().map(() => Array(8).fill("")), 
+                // getters
+                get plusOne() {
+                return this.count + 1
+                },
+                // methods
+                verificarGabarito(tabelaParaGabarito) {
+                    let gabarito = this.buscarGabarito(tabelaParaGabarito.id)
+                    debugger
+                    for (let linha=0; linha < this.questaoUmLinhas; linha++){
+                        for (let celula=0; celula < this.questaoUmColunas; celula++){
+                            debugger
+                            let chave = linha.toString()+celula.toString()
+                            let valorDaCelula = this.questaoUmCelulas[linha.toString()][celula.toString()]
+                                if (valorDaCelula == gabarito[linha][celula]){
+                                    this.questaoUmCorPadrao[linha][celula] = 'cor-certa'
+                                } else {
+                                    this.questaoUmCorPadrao[linha][celula] = 'cor-errada'
+                                }
+                        }
+                    }    
+                },
+                imprimirGabarito(tabelaParaGabarito) {
+                    for (let linha=0; linha < this.questaoUmLinhas; linha++){
+                        for (let celula=0; celula < this.questaoUmColunas; celula++){
+                            this.questaoUmCelulas[linha.toString()][celula.toString()] = this.questaoUmMatriz[linha][celula] 
+                    }}
+                },
+                buscarGabarito(chaveParaGabarito) {
+                    this.gabarito[chaveParaGabarito]
+                    return this.gabarito[chaveParaGabarito] 
+                }
+            }).mount()
+        </script>
+        <head>
+            <script src="https://unpkg.com/petite-vue" defer init></script>
+            <title>Resolve a Tabela Verdade</title>
+            <link rel="stylesheet" href="styletv.css" />
+        </head>
+    <body>
         <h1>Resolve a Tabela Verdade</h1>
         <div>
-            <h3>p V (q ^ r) <-> (p V q) ^ (p V r)</h3>
-            <p>O resultado deve ser uma tautologia</p>
+            <h3>Glossário</h3>
+            * ^ significa and ou e. A operação "E" (p ^ q) só retorna verdadeira se ambas as condições forem verdadeiras, caso contrário, retorna falsa..
         </div>
-
-        <table class="tabela-padronizada">
-            <tr>
-                <th>P</th>
-                <th>Q</th>
-                <th>R</th>
-                <th>Q ^ R</th>
-                <th>P \/ (Q ^ R) = a</th>
-                <th>P \/ Q = b </th>
-                <th>P \/ R = c </th>
-                <th>b ^ c = d </th>
-                <th>a <-> d</th>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v11">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v12">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v13">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v14">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                <td>
-                    <select name="v15">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v16">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v17">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v18">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v19">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v21">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v22">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v23">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v24">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                <td>
-                    <select name="v25">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v26">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v27">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v28">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v29">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v31">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v32">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v33">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v34">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                <td>
-                    <select name="v35">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v36">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v37">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v38">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v39">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v41">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v42">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v43">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v44">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v45">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v46">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v47">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v48">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v49">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v51">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v52">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v53">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v54">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v55">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v56">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v57">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v58">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v59">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v61">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v62">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v63">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v64">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v65">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v66">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v67">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v68">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v69">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v71">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v72">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v73">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v74">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v75">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v76">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v77">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v78">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v79">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="v81">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v82">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v83">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v84">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v85">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v86">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v87">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v88">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="v89">
-                        <option value="">  </option>
-                        <option value="V"> V </option>
-                        <option value="F"> F </option>
-                    </select>
-                </td>
-            </tr>
-        </table>
+            <div>
+                <h3>p V (q ^ r) <-> (p V q) ^ (p V r)</h3>
+                <p>Exercício 01 -> O resultado deve ser uma tautologia</p>
+            </div>
+    <div v-scope>
+        <div id="questaoUm">
+            <table id="questaoUmMatriz">
+                <thead><tr>
+                    <th id="variavel" >P</th>
+                    <th id="variavel">Q</th>
+                    <th id="variavel">R</th>
+                    <th>Q ^ R</th>
+                    <th>P \/ (Q ^ R) = a</th>
+                    <th>P \/ Q = b </th>
+                    <th>P \/ R = c </th>
+                    <th>b ^ c = d </th>
+                    <th>a <-> d</th>
+                </tr></thead>
+                <tr v-for="(linha, indexLinha) in questaoUmLinhas">
+                    <td v-for="(celula, indexCelula) in questaoUmColunas" :class="questaoUmCorPadrao[indexLinha][indexCelula]" :key="`${indexLinha}${indexCelula}`">
+                        <select v-model="questaoUmCelulas[indexLinha][indexCelula]"> 
+                            <option>V</option>
+                            <option>F</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button @click=verificarGabarito(questaoUmMatriz)>
+                Verificar o gabarito
+            </button>
+            <button @click="imprimirGabarito(questaoUmMatriz)">
+                Ver a resposta
+            </button>
+        </div>
     </div>
-</body>
 
-</html>
+    <div v-scope>
+        <div id="questaoUm">
+            <table id="questaoUmMatriz">
+                <thead><tr>
+                    <th id="variavel" >P</th>
+                    <th id="variavel">Q</th>
+                    <th id="variavel">R</th>
+                    <th>Q ^ R</th>
+                    <th>P \/ (Q ^ R) = a</th>
+                    <th>P \/ Q = b </th>
+                    <th>P \/ R = c </th>
+                    <th>b ^ c = d </th>
+                    <th>a <-> d</th>
+                </tr></thead>
+                <tr v-for="(linha, indexLinha) in questaoUmLinhas">
+                    <td v-for="(celula, indexCelula) in questaoUmColunas" :class="questaoUmCorPadrao[indexLinha][indexCelula]" :key="`${indexLinha}${indexCelula}`">
+                        <select v-model="questaoUmCelulas[indexLinha][indexCelula]"> 
+                            <option>V</option>
+                            <option>F</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button @click=verificarGabarito(questaoUmMatriz)>
+                Verificar o gabarito
+            </button>
+            <button @click="imprimirGabarito(questaoUmMatriz)">
+                Ver a resposta
+            </button>
+        </div>
+    </div>
+    </body>
+    </html>
