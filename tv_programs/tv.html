@@ -5,12 +5,8 @@
             createApp({
                 questaoUmLinhas: 8,
                 questaoUmColunas: 9,
-                questaoDoisLinhas: 8,
-                questaoDoisColunas: 9,
                 questaoUmCelulas: Array(8).fill().map(() => Array(8).fill("")),
-                questaoDoisCelulas: Array(8).fill().map(() => Array(8).fill("")),
-                gabarito: {
-                    questaoUmMatriz : [
+                questaoUmMatriz : [
                     ['V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
                     ['V', 'V', 'F', 'F', 'V', 'V', 'V', 'V', 'V'],
                     ['V', 'F', 'V', 'F', 'V', 'V', 'V', 'V', 'V'],
@@ -20,34 +16,14 @@
                     ['F', 'F', 'V', 'F', 'F', 'F', 'V', 'F', 'V'],
                     ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'V']
                     ],
-                    questaoDoisMatriz : [
-                    ['V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
-                    ['V', 'V', 'F', 'F', 'V', 'V', 'V', 'V', 'V'],
-                    ['V', 'F', 'V', 'F', 'V', 'V', 'V', 'V', 'V'],
-                    ['V', 'F', 'F', 'F', 'V', 'V', 'V', 'V', 'V'],
-                    ['F', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
-                    ['F', 'V', 'F', 'F', 'F', 'V', 'F', 'F', 'V'],
-                    ['F', 'F', 'V', 'F', 'F', 'F', 'V', 'F', 'V'],
-                    ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'V']
-                    ],
-                },
                 questaoUmCorPadrao: Array(8).fill().map(() => Array(8).fill("")), 
-                questaoDoisCorPadrao: Array(8).fill().map(() => Array(8).fill("")), 
-                // getters
-                get plusOne() {
-                return this.count + 1
-                },
                 // methods
-                verificarGabarito(tabelaParaGabarito) {
-                    let tabela = tabelaParaGabarito.id
-                    let gabarito = this.buscarGabarito(tabela)
-                    let amor = this[tabela]
+                verificarGabarito() {
                     for (let linha=0; linha < this.questaoUmLinhas; linha++){
                         for (let celula=0; celula < this.questaoUmColunas; celula++){
                             let chave = linha.toString()+celula.toString()
-                            debugger
-                            let valorDaCelula = this.questaoUmCelulas[linha.toString()][celula.toString()]
-                                if (valorDaCelula == gabarito[linha][celula]){
+                            let valorDaCelula = this.questaoUmMatriz[linha.toString()][celula.toString()]
+                                if (valorDaCelula == this.questaoUmMatriz[linha][celula]){
                                     this.questaoUmCorPadrao[linha][celula] = 'cor-certa'
                                 } else {
                                     this.questaoUmCorPadrao[linha][celula] = 'cor-errada'
@@ -55,15 +31,11 @@
                         }
                     }    
                 },
-                imprimirGabarito(tabelaParaGabarito) {
+                imprimirGabarito() {
                     for (let linha=0; linha < this.questaoUmLinhas; linha++){
                         for (let celula=0; celula < this.questaoUmColunas; celula++){
                             this.questaoUmCelulas[linha.toString()][celula.toString()] = this.questaoUmMatriz[linha][celula] 
                     }}
-                },
-                buscarGabarito(chaveParaGabarito) {
-                    this.gabarito[chaveParaGabarito]
-                    return this.gabarito[chaveParaGabarito] 
                 }
             }).mount()
         </script>
@@ -112,35 +84,7 @@
                 Ver a resposta
             </button>
         </div>
-        <div id="questaoDois">
-            <table id="questaoDoisMatriz">
-                <thead><tr>
-                    <th id="variavel" >P</th>
-                    <th id="variavel">Q</th>
-                    <th id="variavel">R</th>
-                    <th>Q ^ R</th>
-                    <th>P \/ (Q ^ R) = a</th>
-                    <th>P \/ Q = b </th>
-                    <th>P \/ R = c </th>
-                    <th>b ^ c = d </th>
-                    <th>a <-> d</th>
-                </tr></thead>
-                <tr v-for="(linha, indexLinha) in questaoDoisLinhas">
-                    <td v-for="(celula, indexCelula) in questaoDoisColunas" :class="questaoDoisCorPadrao[indexLinha][indexCelula]" :key="`${indexLinha}${indexCelula}`">
-                        <select v-model="questaoDoisCelulas[indexLinha][indexCelula]"> 
-                            <option>V</option>
-                            <option>F</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <button @click=verificarGabarito(questaoDoisMatriz)>
-                Verificar o gabarito
-            </button>
-            <button @click="imprimirGabarito(questaoDoisMatriz)">
-                Ver a resposta
-            </button>
-        </div>
+
     </div>
 
     
