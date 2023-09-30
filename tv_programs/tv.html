@@ -17,20 +17,31 @@
                     ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'V']
                     ],
                 questaoUmCorPadrao: Array(8).fill().map(() => Array(8).fill("")), 
-                // methods
+                // Inicializa uma matriz bidimensional questaoUmCorPadrao com 8 linhas e 8 colunas,
+                // preenchendo todas as células com strings vazias inicialmente. Ela armazenar as classes CSS que determinarão a aparência visual das células na tabela,
+                // indicando se as respostas dos usuários estão corretas ou incorretas.
+
                 verificarGabarito() {
-                    for (let linha=0; linha < this.questaoUmLinhas; linha++){
-                        for (let celula=0; celula < this.questaoUmColunas; celula++){
-                            let chave = linha.toString()+celula.toString()
-                            let valorDaCelula = this.questaoUmMatriz[linha.toString()][celula.toString()]
-                                if (valorDaCelula == this.questaoUmMatriz[linha][celula]){
-                                    this.questaoUmCorPadrao[linha][celula] = 'cor-certa'
-                                } else {
-                                    this.questaoUmCorPadrao[linha][celula] = 'cor-errada'
-                                }
+                // Esta função verificarGabarito é acionada quando o botão "Verificar o gabarito" é clicado.
+                // Ela percorre cada célula da tabela (representando uma entrada em uma tabela verdade)
+                    for (let linha = 0; linha < this.questaoUmLinhas; linha++) {
+                        for (let celula = 0; celula < this.questaoUmColunas; celula++) {
+                            // Acesse o valor selecionado pelo usuário em questaoUmCelulas
+                            let valorSelecionado = this.questaoUmCelulas[linha][celula];
+                            // Acesse o valor correto em questaoUmMatriz
+                            let valorCorreto = this.questaoUmMatriz[linha][celula];
+                            // Compare os valores
+                            if (valorSelecionado === valorCorreto) {
+                            // e compara o valor selecionado pelo usuário (valorSelecionado) com o valor correto da tabela verdade (valorCorreto).
+                            // Com base na comparação, ela atribui uma classe CSS à célula em questaoUmCorPadrao se a resposta do usuário está correta ou incorreta.
+                                this.questaoUmCorPadrao[linha][celula] = 'cor-certa';
+                            } else {
+                                this.questaoUmCorPadrao[linha][celula] = 'cor-errada';
                         }
-                    }    
-                },
+                    }
+                }
+            },
+
                 imprimirGabarito() {
                     for (let linha=0; linha < this.questaoUmLinhas; linha++){
                         for (let celula=0; celula < this.questaoUmColunas; celula++){
@@ -86,7 +97,5 @@
         </div>
 
     </div>
-
-    
-    </body>
-    </html>
+</body>
+</html>
